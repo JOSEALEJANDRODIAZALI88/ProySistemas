@@ -1,5 +1,5 @@
 #hol come stan
-
+#hola com oe esatasdDAD
 
 import random
 from collections import deque
