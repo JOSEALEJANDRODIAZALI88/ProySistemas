@@ -22,6 +22,7 @@ def asignacion_memoria_mejorada(procesos, memoria):
 
         resultados[nombre] = {
             "Asignación": asignacion,
+            "Espacio restante": espacio_restante,
             "Fragmentación externa": fragmentacion_externa,
             "Porcentaje de uso de memoria": round(porcentaje_uso_memoria, 2),
             "Nivel de multiprogramación": procesos_asignados,
@@ -33,6 +34,23 @@ def asignacion_memoria_mejorada(procesos, memoria):
     aplicar_algoritmo("Peor Ajuste", lambda indices, p, esp: max(indices, key=lambda i: esp[i] - p))
 
     return resultados
+
+
+def imprimir_resultados_consola(resultados, procesos, memoria):
+    for nombre, datos in resultados.items():
+        print(f"\n--- {nombre.upper()} ---")
+        for i, bloque in enumerate(datos["Asignación"]):
+            if bloque != -1:
+                print(f"Proceso {procesos[i]}MB asignado al Bloque {bloque + 1} ({memoria[bloque]}MB)")
+            else:
+                print(f"Proceso {procesos[i]}MB no fue asignado.")
+
+        print("\nResumen:")
+        print(f"- Fragmentación externa: {datos['Fragmentación externa']} MB")
+        print(f"- Porcentaje de uso de memoria: {datos['Porcentaje de uso de memoria']}%")
+        print(f"- Nivel de multiprogramación: {datos['Nivel de multiprogramación']} procesos")
+        print(f"- Trabajos postergados: {datos['Trabajos postergados']}")
+        print("- Espacio restante en cada bloque:", datos["Espacio restante"])
 
 
 def graficar_resultados_con_espacio_memoria(resultados, procesos, memoria):
@@ -75,11 +93,11 @@ def graficar_resultados_con_espacio_memoria(resultados, procesos, memoria):
 # DATOS DE ENTRADA
 # ======================
 procesos = [100, 50, 30, 80, 40]
-memoria  = [120, 50, 200, 70, 60]
+memoria  = [100, 50, 30, 80, 40]
 
 # ======================
 # EJECUCIÓN
 # ======================
 resultados = asignacion_memoria_mejorada(procesos, memoria)
+imprimir_resultados_consola(resultados, procesos, memoria)
 graficar_resultados_con_espacio_memoria(resultados, procesos, memoria)
-
