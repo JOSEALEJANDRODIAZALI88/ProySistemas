@@ -93,7 +93,7 @@ def graficar_resultados_con_espacio_memoria(resultados, procesos, memoria):
 # DATOS DE ENTRADA
 # ======================
 procesos = [100, 50, 30, 80, 40]
-memoria  = [100, 50, 30, 80, 40]
+memoria  = [120, 50, 200, 70, 60]
 
 # ======================
 # EJECUCIÓN
